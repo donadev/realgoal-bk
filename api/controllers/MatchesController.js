@@ -8,10 +8,12 @@
 module.exports = {
 
 	list: function(req, res) {
+		console.log("list", "list")
 		var scraper = new ListScraper();
 		scraper.scrape(function(error, matches) {
+			console.log(error, matches)
             if(error) return res.serverError({error: error});
-            return res.ok(matches);
+            return res.ok(matches ?? []);
         });
 	},
 	detail: function(req, res) {

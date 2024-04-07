@@ -1,24 +1,19 @@
-var phantom = require("phantom");
- module.exports = {
+const puppeteer = require("puppeteer");
 
-     obtainPage: function(url) {
-         return new Promise(function(resolve, reject) {
-             var instance, page;
-             phantom.create()
-                    .then(function(_instance) {
-                        instance = _instance;
-                        return instance.createPage();
-                    })
-                    .then(function(_page) {
-                        page = _page;
-                        return page.open(url, {encoding: "utf8"});
-                    }).then(function(status) {
-                        if(status != "success") return reject();
-                        var body = page.property("content");
-                        page.close();
-                        instance.exit();
-                        return resolve(body);
-                    });
-         });
-     }
- };
+const obtainPage = async function(url) {
+    const browser = await puppeteer.launch()
+    const page = await browser.newPage()
+    let content = null
+    try {
+        await page.goto(url)
+        content = await page.content();
+        console.log("content", content)
+    } catch (error) {
+        console.error("Error", error)
+    } finally {
+        await browser.close();
+    }
+    return content
+}
+
+module.exports = { obtainPage };
