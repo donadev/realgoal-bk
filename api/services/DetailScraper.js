@@ -16,20 +16,20 @@ module.exports = function(match) {
     this.parseEvent = function(item) {
         var event = {};
 
-        event.time = $(item).find(".time-box, .time-box-wide").text();
-        event.team = $(item).find(".fl").find(".wrapper").text().trim() ? "home" : "away";
-        event.participant = $(item).find(".participant-name").find("a").text();
-        event.assist = $(item).find(".assist").find("a").text();
-        var icon = $(item).find(".icon-box");
-        if(icon.hasClass("y-card")) event.name = "yellow_card";
-        else if(icon.hasClass("r-card")) event.name = "red_card";
-        else if(icon.hasClass("soccer-ball")) event.name = "goal";
-        else if(icon.hasClass("substitution-in")) {
+        event.time = $(item).find(".smv__timeBox").text();
+        event.team = $(item).hasClass("smv__homeParticipant") ? "home" : "away";
+        event.participant = $(item).find(".smv__playerName").text();
+        event.assist = $(item).find(".smv__assist").find("a").text();
+        var icon = $(item).find(".smv__incident svg");
+        if(icon.hasClass("yellowCard-ico")) event.name = "yellow_card";
+        else if(icon.hasClass("redCard-ico")) event.name = "red_card";
+        else if(icon.attr("data-testid") == "wcl-icon-soccer") event.name = "goal"; 
+        else if(icon.hasClass("substitution")) {
             event.name = "substitution";
-            event.substitution_in = $(item).find(".substitution-in-name").find("a").text();
-            event.substitution_out = $(item).find(".substitution-out-name").find("a").text();
+            event.substitution_in = $(item).find(".smv__playerName").text(); 
+            event.substitution_out = $(item).find(".smv__subDown").text(); 
         }
-        else if(icon.hasClass("soccer-ball-own")) {
+        else if(icon.hasClass("soccer-ball-own")) { //TODO
             event.name = "autogol";
             event.team = event.team == "home" ? "away" : "home";
         }
@@ -51,7 +51,7 @@ module.exports = function(match) {
         match.date = $(".duelParticipant__startTime").text();
         match.events = [];
 
-        $(".parts-first").find(".odd, .even").each(function(i, elem) {
+        $(".smv__verticalSections").find(".smv__participantRow").each(function(i, elem) {
             var matchEvent = self.parseEvent(elem);
             match.events.push(matchEvent);
         });
