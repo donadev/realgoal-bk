@@ -2,7 +2,7 @@ const puppeteer = require("puppeteer");
 
 const obtainPage = async function(url) {
     const browser = await puppeteer.launch({
-        executablePath: '/usr/bin/google-chrome',
+        //executablePath: '/usr/bin/google-chrome',
         args: ['--no-sandbox', '--disable-setuid-sandbox']
     });
     const page = await browser.newPage()
@@ -10,6 +10,7 @@ const obtainPage = async function(url) {
     try {
         await page.goto(url)
         content = await page.content();
+        console.log(content)
     } catch (error) {
         console.error("Error", error)
     } finally {
