@@ -1,7 +1,13 @@
 FROM node:20
 
 # Set environment variables
+# Install necessary dependencies
+RUN apt-get update && \
+    apt-get install -y libnss3 && \
+    rm -rf /var/lib/apt/lists/*
 
+# Set LD_LIBRARY_PATH environment variable
+ENV LD_LIBRARY_PATH="/usr/lib/x86_64-linux-gnu/"
 # Set working directory
 WORKDIR /app
 
