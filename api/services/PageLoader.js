@@ -1,7 +1,9 @@
 const puppeteer = require("puppeteer");
 
 const obtainPage = async function(url) {
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({
+        executablePath: '/usr/bin/google-chrome'
+    });
     const page = await browser.newPage()
     let content = null
     try {
