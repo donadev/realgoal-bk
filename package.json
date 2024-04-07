@@ -5,7 +5,7 @@
   "description": "a Sails application",
   "keywords": [],
   "dependencies": {
-    "@sparticuz/chromium": "^123.0.1",
+    "@sparticuz/chromium": "^123.0.6",
     "cheerio": "^0.20.0",
     "ejs": "~0.8.4",
     "grunt": "0.4.2",
