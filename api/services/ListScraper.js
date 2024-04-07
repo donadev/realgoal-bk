@@ -15,37 +15,46 @@ module.exports = function() {
     this.parseMatch = function(item) {
         var output = {
             id: $(item).attr("id").substring(4),
-            hour: $(item).find(".time").remove("span").text(),
-            team_home: $(item).find(".team-home").find("span").remove("span").text(),
-            team_away: $(item).find(".team-away").find("span").remove("span").text(),
-            score: $(item).find(".score").remove("span").text(),
-            timer: $(item).find(".timer").find("span").remove("span").text()
+            hour: $(item).find(".event__time").text(),
+            team_home: $(item).find(".event__participant--home").text(),
+            team_away: $(item).find(".event__participant--away").text(),
+            score_home: $(item).find(".event__score--home").text(),
+            score_away: $(item).find(".event__score--away").text(),
+            timer: $(item).find(".event__stage--block").text(),
+            state: "finished"
         };
-        if ($(item).hasClass("stage-scheduled")) output.state = "scheduled";
-        if ($(item).hasClass("stage-live")) output.state = "live";
-        if ($(item).hasClass("stage-finished")) output.state = "finished";
+        if ($(item).hasClass("event__match--scheduled")) output.state = "scheduled";
+        if ($(item).hasClass("event__match--live")) output.state = "live";
         return output;
     };
     this.parseChamp = function(item) {
         var championship = {
-            country: $(item).find(".country_part").remove("span").text().slice(0, -2),
-            tournament: $(item).find(".tournament_part").remove("span").text(),
+            country: $(item).find(".event__titleBox > .wclLeagueHeader__overline").text(),
+            tournament: $(item).find(".event__titleBox > a").text(),
             matches: []
         };
-        $(item).find("tbody tr").each(function(i, elem) {
-            var match = self.parseMatch(elem);
-            championship.matches.push(match);
-        });
         return championship;
     };
+    this.isChamp = function(item) {
+        return $(item).hasClass("wclLeagueHeader")
+    }
+    this.isMatch = function(item) {
+        return $(item).hasClass("event__match")
+    }
     this.parseMatches = function(content) {
         return new Promise(function(resolve, reject) {
             $ = cheerio.load(content);
             if($ == null) return reject("diretta.it has bad page syntax");
+            console.log("Parsing content")
             var championships = [];
-            $("body").find("table").each(function(i, item) {
-                var championship = self.parseChamp(item);
-                championships.push(championship);
+            $("body").find(".sportName.soccer div").each(function(i, item) {
+                if (self.isChamp(item)) {
+                    const championship = self.parseChamp(item);
+                    championships.push(championship);
+                } else if (self.isMatch(item)) {
+                    const match = self.parseMatch(item)
+                    championships[championships.length - 1].matches.push(match)
+                }
             });
             return resolve(championships);
         });
