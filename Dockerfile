@@ -3,7 +3,7 @@ FROM node:20
 # Set environment variables
 # Install necessary dependencies
 RUN apt-get update && \
-    apt-get install -y libnss3 && \
+    apt-get install -y libnss3 libdbus-1 && \
     rm -rf /var/lib/apt/lists/*
 
 # Set LD_LIBRARY_PATH environment variable
