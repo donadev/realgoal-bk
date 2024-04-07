@@ -6,7 +6,6 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Set environment variables
-ENV PUPPETEER_EXECUTABLE_PATH="/usr/bin/chromium-browser"
 
 # Set working directory
 WORKDIR /app
