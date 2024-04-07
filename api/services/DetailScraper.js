@@ -38,18 +38,17 @@ module.exports = function(match) {
 
     this.parseMatch = function() {
         var match = {};
-
         match.home = {
-            icon: sails.config.connections.baseAPIUrl + $(".tlogo-home").find("img").attr("src"),
-            name: $(".tname-home").find("span").text().trim(),
-            score: $(".current-result").find(".scoreboard").eq(0).text().trim()
+            icon: $(".duelParticipant__home").find("img").attr("src"),
+            name: $(".duelParticipant__home").find(".participant__participantName a").text().trim(),
+            score: $(".detailScore__wrapper").find("span").eq(0).text().trim()
         };
         match.away = {
-            icon: sails.config.connections.baseAPIUrl + $(".tlogo-away").find("img").attr("src"),
-            name: $(".tname-away").find("span").text().trim(),
-            score: $(".current-result").find(".scoreboard").eq(1).text().trim()
+            icon: $(".duelParticipant__away").find("img").attr("src"),
+            name: $(".duelParticipant__away").find(".participant__participantName a").text().trim(),
+            score: $(".detailScore__wrapper").find("span").eq(2).text().trim()
         };
-        match.date = $("#utime").text();
+        match.date = $(".duelParticipant__startTime").text();
         match.events = [];
 
         $(".parts-first").find(".odd, .even").each(function(i, elem) {
