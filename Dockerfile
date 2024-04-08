@@ -20,6 +20,7 @@ WORKDIR /app
 # Copy package.json and package-lock.json
 COPY package*.json ./
 COPY render_build.sh ./
+RUN chmod +x render_build.sh
 
 # Install dependencies
 RUN ./render_build.sh
