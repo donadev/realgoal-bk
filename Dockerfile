@@ -21,7 +21,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install dependencies
-RUN npm install
+RUN ./render-build.sh
 
 # Copy the rest of the application code
 COPY . .
