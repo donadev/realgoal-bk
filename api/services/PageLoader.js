@@ -1,9 +1,7 @@
 const puppeteer = require("puppeteer-core");
 
 const obtainPage = async function(url) {
-    let browser
-    if (process.env.NODE_ENV !== 'development') {
-        const chromium = require('@sparticuz/chromium')
+    const chromium = require('@sparticuz/chromium')
         // Optional: If you'd like to disable webgl, true is the default.
         chromium.setGraphicsMode = false
         const puppeteer = require('puppeteer-core')
@@ -13,10 +11,6 @@ const obtainPage = async function(url) {
             executablePath: await chromium.executablePath(),
             headless: chromium.headless,
         })
-    } else {
-        const puppeteer = require('puppeteer')
-        browser = await puppeteer.launch({headless: 'new'})
-    }
     const page = await browser.newPage()
     let content = null
     try {
