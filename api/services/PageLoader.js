@@ -1,7 +1,7 @@
 const puppeteer = require("puppeteer-core");
 
 const obtainPage = async function(url) {
-    const chromium = require('@sparticuz/chromium')
+    const chromium = require('@sparticuz/chromium-min')
         // Optional: If you'd like to disable webgl, true is the default.
         chromium.setGraphicsMode = false
         const puppeteer = require('puppeteer-core')
