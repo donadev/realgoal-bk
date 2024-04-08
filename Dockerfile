@@ -21,7 +21,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install dependencies
-RUN ./render_build.sh
+RUN ./../render_build.sh
 
 # Copy the rest of the application code
 COPY . .
