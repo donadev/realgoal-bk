@@ -1,14 +1,7 @@
+const puppeteer = require('puppeteer')
+
 const obtainPage = async function(url) {
-    const chromium = require('@sparticuz/chromium-min')
-        // Optional: If you'd like to disable webgl, true is the default.
-        chromium.setGraphicsMode = false
-        const puppeteer = require('puppeteer-core')
-        browser = await puppeteer.launch({
-            args: chromium.args,
-            defaultViewport: chromium.defaultViewport,
-            executablePath: await chromium.executablePath(),
-            headless: chromium.headless,
-        })
+    const browser = await puppeteer.launch({args: ['--no-sandbox']});
     const page = await browser.newPage()
     let content = null
     try {
