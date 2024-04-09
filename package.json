@@ -5,7 +5,9 @@
   "description": "a Sails application",
   "keywords": [],
   "dependencies": {
-    "@sparticuz/chromium-min": "^123.0.1",
+    "@webcomponents/webcomponentsjs": "^1.2.6",
+    "chrome-launcher": "^0.10.2",
+    "chrome-remote-interface": "^0.26.1",
     "cheerio": "^0.20.0",
     "ejs": "~0.8.4",
     "grunt": "0.4.2",
