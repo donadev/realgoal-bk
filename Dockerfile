@@ -14,17 +14,13 @@ RUN apt-get update && \
 
 # Set LD_LIBRARY_PATH environment variable
 ENV LD_LIBRARY_PATH="/usr/lib/x86_64-linux-gnu/"
-# Set working directory
 WORKDIR /app
 
 # Copy package.json and package-lock.json
 COPY package*.json ./
-COPY render_build.sh ./
-#RUN chmod +x render_build.sh
-RUN npm install
 
 # Install dependencies
-#RUN ./render_build.sh
+RUN npm install
 
 # Copy the rest of the application code
 COPY . .
