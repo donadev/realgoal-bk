@@ -6,7 +6,7 @@ module.exports = function() {
     this.scrape = function(cb) {
         var self = this;
         PageLoader.obtainPage(sails.config.connections.baseAPIUrl)
-            .then(self.parseMatches)
+            .then((url) => self.parseMatches(url, ".wclLeagueHeader__overline"))
             .then(function(matches) {
                 cb(null, matches);
             }).catch(cb);
