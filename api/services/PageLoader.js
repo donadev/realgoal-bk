@@ -7,7 +7,7 @@ const obtainPage = async function(url) {
     try {
         await page.goto(url)
         content = await page.content();
-        console.log(content)
+        console.log("Content fetched for url", url)
     } catch (error) {
         console.error("Error", error)
     } finally {
