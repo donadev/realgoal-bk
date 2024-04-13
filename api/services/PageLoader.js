@@ -1,7 +1,8 @@
-const puppeteer = require('puppeteer')
+const puppeteer = require('puppeteer-core')
+const os = require("os");
 
 const obtainPage = async function(url, selectorToWaitFor) {
-    const browser = await puppeteer.launch({headless: true, args: ['--no-sandbox']});
+    const browser = await puppeteer.launch({headless: true, args: ['--no-sandbox'], executablePath: `/opt/render/project/src/.cache/puppeteer/chrome-headless-shell/linux-123.0.6312.105/chrome-headless-shell-linux64/chrome-headless-shell`});
     const page = await browser.newPage()
     let content = null
 
