@@ -4,6 +4,7 @@ const os = require("os");
 const obtainPage = async function(url, selectorToWaitFor) {
     const browser = await puppeteer.launch({headless: true, args: ['--no-sandbox', "--proxy-server='direct://'", '--proxy-bypass-list=*']});
     const page = await browser.newPage()
+    await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36')
     let content = null
 
     try {
