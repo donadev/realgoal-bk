@@ -1,11 +1,12 @@
 const puppeteer = require('puppeteer')
 
-const obtainPage = async function(url) {
-    const browser = await puppeteer.launch({args: ['--no-sandbox']});
+const obtainPage = async function(url, selectorToWaitFor) {
+    const browser = await puppeteer.launch({headless: true, args: ['--no-sandbox']});
     const page = await browser.newPage()
     let content = null
     try {
-        await page.goto(url, { waitUntil: 'domcontentloaded' })
+        page.goto(url, { waitUntil: 'domcontentloaded' })
+        await page.waitForSelector(selectorToWaitFor)
         content = await page.content();
         console.log("Content fetched for url", url)
     } catch (error) {
