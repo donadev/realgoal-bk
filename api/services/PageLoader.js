@@ -1,4 +1,4 @@
-const puppeteer = require('puppeteer-core')
+const puppeteer = require('puppeteer')
 const os = require("os");
 
 const obtainPage = async function(url, selectorToWaitFor) {
