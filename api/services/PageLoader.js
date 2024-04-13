@@ -5,7 +5,7 @@ const obtainPage = async function(url) {
     const page = await browser.newPage()
     let content = null
     try {
-        await page.goto(url)
+        await page.goto(url, { waitUntil: 'domcontentloaded' })
         content = await page.content();
         console.log("Content fetched for url", url)
     } catch (error) {
