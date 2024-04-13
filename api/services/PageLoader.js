@@ -2,7 +2,7 @@ const puppeteer = require('puppeteer')
 const os = require("os");
 
 const obtainPage = async function(url, selectorToWaitFor) {
-    const browser = await puppeteer.launch({headless: true, args: ['--no-sandbox']});
+    const browser = await puppeteer.launch({headless: true, args: ['--no-sandbox', "--proxy-server='direct://'", '--proxy-bypass-list=*']});
     const page = await browser.newPage()
     let content = null
 
