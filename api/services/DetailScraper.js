@@ -7,7 +7,7 @@ module.exports = function(match) {
     this.scrape = function(cb) {
         var self = this;
         PageLoader.obtainPage(sails.config.connections.baseAPIUrl + "partita/" + this.match + "/#informazioni-partita")
-            .then(self.parseMatchInfos)
+            .then((url) => self.parseMatchInfos(url, ".smv__homeParticipant"))
             .then(function(match) {
                 cb(null, match);
             }).catch(cb);
