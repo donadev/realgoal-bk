@@ -44,6 +44,7 @@ module.exports = function() {
     this.parseMatches = function(content) {
         console.log("parseMatches with content.size", content?.length ?? 0)
         return new Promise(function(resolve, reject) {
+            if(content == null) return resolve(null)
             $ = cheerio.load(content);
             if($ == null) return reject("diretta.it has bad page syntax");
             console.log("Parsing content")
