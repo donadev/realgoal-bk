@@ -5,8 +5,8 @@ module.exports = function() {
     $ = null;
     this.scrape = function(cb) {
         var self = this;
-        PageLoader.obtainPage(sails.config.connections.baseAPIUrl)
-            .then((url) => self.parseMatches(url, ".wclLeagueHeader__overline"))
+        PageLoader.obtainPage(sails.config.connections.baseAPIUrl, ".event__match")
+            .then(self.parseMatches)
             .then(function(matches) {
                 cb(null, matches);
             }).catch(cb);
@@ -42,7 +42,6 @@ module.exports = function() {
         return $(item).hasClass("event__match")
     }
     this.parseMatches = function(content) {
-        console.log("parseMatches with content.size", content?.length ?? 0)
         return new Promise(function(resolve, reject) {
             if(content == null) return resolve(null)
             $ = cheerio.load(content);
